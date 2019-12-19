@@ -3,7 +3,7 @@ formatTodo.innerHTML = `
 <style>
     .outer-container {
         width: 100%;
-        height: 40px;
+        height: 60px;
         border: 1px solid gray;
         background-color: white;
         padding-top: 20px;
@@ -13,20 +13,20 @@ formatTodo.innerHTML = `
 
     h3 {
         position: relative;
-        bottom: 35px;
+        bottom: 30px;
         left: 40px;
         font-weight: normal;
     }
 
     .description {
         position: relative;
-        bottom: 80px;
+        bottom: 70px;
         left: 40px;
     }
 
     .date {
         position: relative;
-        bottom: 72px;
+        bottom: 67px;
         left: 100px;
     }
     

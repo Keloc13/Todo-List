@@ -12,7 +12,7 @@ templateTodoList.innerHTML = `
         position: relative;
         right: 40px;
         bottom: 16px;
-        height: 620px;
+        height: 560px;
         width: 1000px;
     }
 
@@ -68,7 +68,7 @@ templateTodoList.innerHTML = `
 <div id="outer-listItem-container">
     <div id="todo_header">ToDo List 
         <span id="addTodo">
-            <button onclick="checkBox()">Add Todo</button>
+            <button>Add Todo</button>
         </span>
     </div>
 
@@ -104,15 +104,23 @@ class TodoList extends HTMLElement{
         this._isBoxOpen = false;
     }
 
-    checkBox() {
-        let box = this.shadow.querySelector('#insertBox insert-box')
-        if(this._isBoxOpen) {
-            box.display = 'block';
-        }
-    }
     
-
-    connectedCallback() {}
+    connectedCallback() {
+        console.log("ConnectedCallback todoList");
+        let box = this.shadow.querySelector('#insertBox insert-box');
+        box.addEventListener('click', () => {
+            console.log("Here")
+            if(this._isBoxOpen) {
+                console.log("Display block");
+                box.display = 'block';
+                this._isBoxOpen = true;
+            } else {
+                console.log("Disappearing block");
+                box.display = 'none';
+                this._isBoxOpen = false;
+            }
+        });
+    }
 }
 
 window.customElements.define('todo-list', TodoList);
