@@ -108,6 +108,12 @@ class TodoList extends HTMLElement{
         this.shadow.append(templateTodoList.content.cloneNode(true));
     }
     
+    createTodoItem(title, description) {
+        console.log("Calling create Todo Item");
+        console.log("title: " , title);
+        console.log("Description:", description);
+    } // callback function that is passed into insertBox
+
     checkBox(box) {
         let insertBox = this.shadow.querySelector('insert-box');
         if(!insertBox.isOpen) {
@@ -115,11 +121,9 @@ class TodoList extends HTMLElement{
         } else {
             insertBox.isOpen = false;
         }
+        insertBox.dataFunc = this.createTodoItem;
     }
 
-    createTodoItem() {
-        console.log("Calling create Todo Item");
-    }
 
     connectedCallback() {
         console.log("ConnectedCallback todoList");
@@ -127,7 +131,6 @@ class TodoList extends HTMLElement{
         box.addEventListener('click', function() {
             this.getRootNode().host.checkBox(box);
         });
-        
     }
 }
 

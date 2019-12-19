@@ -100,9 +100,7 @@ class InsertBox extends HTMLElement {
     storeData() {
         let titleVal = this.shadow.getElementById('title').value;
         let descriptionVal = this.shadow.getElementById('description').value;
-
-        console.log("Title value:", titleVal);
-        console.log("Description Value:", descriptionVal);
+        this._dataFunc(titleVal, descriptionVal);
     }
 
     connectedCallback(){
