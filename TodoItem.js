@@ -8,7 +8,7 @@ formatTodo.innerHTML = `
         background-color: white;
         padding-top: 20px;
         padding-left: 40px;
-        background-color: rgba(255,255,255,0.85);
+        background-color: rgba(255,255,255,0.5);
     }
 
     h3 {

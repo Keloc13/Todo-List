@@ -17,7 +17,7 @@ templateTodoList.innerHTML = `
     }
 
     #todo_header {
-        width: 100%;
+        width: 96%;
         height: 40px;
 
         position: relative;
@@ -40,14 +40,16 @@ templateTodoList.innerHTML = `
         font-size: 16px;
 
         position: absolute;
-        right: 40px;
-        top: 0px;
+        right: 0px;
+        bottom: 0px;
     }
 
     #addTodo button{
         background: transparent;
-        padding: 18px 15px;
-        border: 1px solid gray;
+        position: relative;
+        top: 2px;
+        border: none;
+        border-left: 1px groove gray;
     }
 
     #addTodo button:hover {
@@ -61,14 +63,18 @@ templateTodoList.innerHTML = `
 
     #insertBox {
         position: absolute;
-        left: 50%;
+        z-index:2;  
+        left: 35%;
         top: 30%;
+
+        width: 40px;
+        height: 40px;
     }
 </style>
 <div id="outer-listItem-container">
     <div id="todo_header">ToDo List 
         <span id="addTodo">
-            <button>Add Todo</button>
+            <button><img src="Icons/add_circle.svg" height="50px" width="50px"></button>
         </span>
     </div>
 
@@ -95,31 +101,33 @@ templateTodoList.innerHTML = `
 </div>
 `
 
-
 class TodoList extends HTMLElement{
     constructor() {
         super();
         this.shadow = this.attachShadow({mode: "open"});
         this.shadow.append(templateTodoList.content.cloneNode(true));
-        this._isBoxOpen = false;
+    }
+    
+    checkBox(box) {
+        let insertBox = this.shadow.querySelector('insert-box');
+        if(!insertBox.isOpen) {
+            insertBox.isOpen = true;
+        } else {
+            insertBox.isOpen = false;
+        }
     }
 
-    
+    createTodoItem() {
+        console.log("Calling create Todo Item");
+    }
+
     connectedCallback() {
         console.log("ConnectedCallback todoList");
-        let box = this.shadow.querySelector('#insertBox insert-box');
-        box.addEventListener('click', () => {
-            console.log("Here")
-            if(this._isBoxOpen) {
-                console.log("Display block");
-                box.display = 'block';
-                this._isBoxOpen = true;
-            } else {
-                console.log("Disappearing block");
-                box.display = 'none';
-                this._isBoxOpen = false;
-            }
+        let box = this.shadow.querySelector('#addTodo button');
+        box.addEventListener('click', function() {
+            this.getRootNode().host.checkBox(box);
         });
+        
     }
 }
 

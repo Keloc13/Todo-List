@@ -9,7 +9,6 @@
     <script src="TodoList.js"></script>
     <script src="TodoItem.js"></script>
     
-
     <style>
         * {
             margin: 0px;
@@ -19,6 +18,7 @@
         body {
             display: flex;
             height: 620px;
+            width: 100%;
             background: silver;
             overflow: hidden;
         }
@@ -28,16 +28,21 @@
             height: 100%;
             background-color: #383838;
         }
+        
+        nav > ul {
+            position: relative;
+            bottom: 10px;
+        }
 
         nav > ul > li {
             width: 100%;
             height: 30px;
-            padding-top: 10px
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
 
         nav > ul > li:hover {
             cursor: pointer;
-
         }
 
         nav > ul button:hover {
@@ -53,9 +58,10 @@
             font-size: 16px;
             opacity: .9;
 
-            padding-left: 20px;
+            padding-left: 50px;
             width: 100%;
-            height: 40px;
+            height: 50px;
+            padding-bottom: 10px;
             text-align: left;
         }
         button:focus {
@@ -71,14 +77,19 @@
         #hamburgerMenu {
             color: white;
             padding-left: 20px;
-            height: 34px;
+            height: 33px;
             padding-top: 20px;
             font-size: 16px;
             font-family: Arial, Helvetica, sans-serif;
             opacity: .9;
-            background-color: black;
+            background-color: #101010;
         }
 
+        nav > ul img {
+            position: relative;
+            right: 20px;
+            top: 8px;
+        }
 
     </style>
 </head>
@@ -89,10 +100,10 @@
         </div>
         <nav>
             <ul>
-                <li><button onclick="getTodo()">Todo List</button></li>
-                <li><button onclick="getInbox()">Inbox</button></li>
-                <li><button onclick="getProjects()">Projects</button></li>
-                <li><button onclick="getCalendar()">Calendar</button></li>
+                <li><button onclick="getTodo()"><img src="Icons/format_list_bulleted.svg" width="25" height="25">Todo List</button></li>
+                <li><button onclick="getInbox()"><img src="Icons/inbox.svg" width="25" height="25">Inbox</button></li>
+                <li><button onclick="getProjects()"><img src="Icons/library_books.svg" width="25" height="25">Projects</button></li>
+                <li><button onclick="getCalendar()"><img src="Icons/calendar_today.svg" width="25" height="25">Calendar</button></li>
             </ul>
         </nav>
     </header>
