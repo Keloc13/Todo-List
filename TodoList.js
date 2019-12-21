@@ -10,19 +10,16 @@ templateTodoList.innerHTML = `
 
     #outer-listItem-container {
         position: relative;
-        right: 40px;
         bottom: 16px;
         height: 560px;
-        width: 1000px;
+        width: 100%;
     }
 
     #todo_header {
-        width: 96%;
-        height: 40px;
 
+        height: 40px;
         position: relative;
         top: 16px;
-        left: 40px;
         padding-top: 10px;
 
         border: 1px solid gray;
@@ -48,6 +45,7 @@ templateTodoList.innerHTML = `
         background: transparent;
         position: relative;
         top: 2px;
+        right: 0px;
         border: none;
         border-left: 1px groove gray;
     }
@@ -59,6 +57,11 @@ templateTodoList.innerHTML = `
 
     .hideItem {
         invisibility: hidden;
+    }
+
+    li {
+        position: relative;
+        right: 40px;
     }
 
     #insertBox {
@@ -82,21 +85,7 @@ templateTodoList.innerHTML = `
         <insert-box></insert-box>
     </div>
 
-    <ul>
-        <li><todo-item></todo-item></li>
-        <li><todo-item></todo-item></li>
-        <li><todo-item></todo-item></li>
-        <li><todo-item></todo-item></li>
-        <li><todo-item></todo-item></li>
-        <li><todo-item></todo-item></li>
-        <li><todo-item></todo-item></li>
-        <li><todo-item></todo-item></li>
-        <li><todo-item></todo-item></li>
-        <li><todo-item></todo-item></li>
-        <li><todo-item></todo-item></li>
-        <li><todo-item></todo-item></li>
-        <li class="hideItem"><todo-item></todo-item></li>
-        <li class="hideItem"><todo-item></todo-item></li>
+    <ul id="list-of-items">
     </ul>
 </div>
 `
@@ -108,10 +97,14 @@ class TodoList extends HTMLElement{
         this.shadow.append(templateTodoList.content.cloneNode(true));
     }
     
-    createTodoItem(title, description) {
+    createTodoItem(title, description, currentObject) {
         console.log("Calling create Todo Item");
-        console.log("title: " , title);
-        console.log("Description:", description);
+
+        let newItem = new TodoItem(title, description);
+        console.log(currentObject.shadow.innerHTML);
+        let listOfItems = currentObject.shadow.getElementById('list-of-items');
+        listOfItems.appendChild(newItem);
+
     } // callback function that is passed into insertBox
 
     checkBox(box) {
@@ -122,6 +115,7 @@ class TodoList extends HTMLElement{
             insertBox.isOpen = false;
         }
         insertBox.dataFunc = this.createTodoItem;
+        insertBox.parentObject = this;
     }
 
 

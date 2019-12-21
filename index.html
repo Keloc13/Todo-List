@@ -24,9 +24,13 @@
         }
 
         header {
-            width: 25%;
+            width: 300px;
             height: 100%;
             background-color: #383838;
+            transition-property: right;
+            transition-duration: .25s;
+            position: relative;
+            right: 0px;
         }
         
         nav > ul {
@@ -71,7 +75,11 @@
         }
         
         main {
-            width: 0%
+            width: 77%;
+            position: absolute;
+            left: 300px;
+            transition-property: "left width";
+            transition-duration: .25s;
         }
 
         #hamburgerMenu {
@@ -82,7 +90,20 @@
             font-size: 16px;
             font-family: Arial, Helvetica, sans-serif;
             opacity: .9;
-            background-color: #101010;
+            background-color: #101011;
+        }
+
+        #hamburgerMenu button {
+            color: white;
+            background-color: transparent;
+            padding: 2px;
+            position: relative;
+            left: 80px;
+        }
+
+        #hamburgerMenu button:hover {
+            cursor: pointer;
+            opacity: .8;
         }
 
         nav > ul img {
@@ -91,12 +112,18 @@
             top: 8px;
         }
 
+        #left-arrow {
+            position: relative;
+            left: 80px;
+        }
+
     </style>
 </head>
 <body>
     <header>
         <div id="hamburgerMenu">
-            Hamburger Menu
+            Hamburger Menu 
+            <button onclick="moveBarLeft()">Move Left</button>
         </div>
         <nav>
             <ul>
@@ -114,6 +141,53 @@
 
     <footer>
         <script>
+            function moveBarLeft() {
+                console.log("Move bar to left function is called")
+                let leftArrowEl = document.querySelector('header');
+                leftArrowEl.style.transitionProperty = "right";
+                leftArrowEl.style.transitionDuration = ".25s";
+                console.log(leftArrowEl);
+                leftArrowEl.style.position = "relative";
+                leftArrowEl.style.right = "200px";
+                let leftArrowBtn = document.querySelector('#hamburgerMenu button');
+                
+                let rightArrowBtn = document.createElement('button');
+                rightArrowBtn.innerHTML = "Move Right";
+                rightArrowBtn.addEventListener('click', () => {
+                    this.moveBarRight()
+                });
+                leftArrowBtn.parentNode.replaceChild(rightArrowBtn,leftArrowBtn);
+                this.moveListLeft();
+            }
+
+            function moveBarRight() {
+                console.log("Move bar to right function is called")
+                let rightArrowEl = document.querySelector('header');
+                console.log(rightArrowEl);
+                rightArrowEl.style.position = "relative";
+                rightArrowEl.style.right = "0px";
+                let rightArrowBtn = rightArrowEl.querySelector('#hamburgerMenu button');
+
+                let leftArrowBtn = document.createElement('button');
+                leftArrowBtn.innerHTML = "Move Left"; 
+                leftArrowBtn.addEventListener('click', () => {
+                    this.moveBarLeft()
+                })
+                rightArrowBtn.parentNode.replaceChild(leftArrowBtn, rightArrowBtn);
+                this.moveListRight();
+            }
+
+            function moveListLeft() {
+                let list = document.querySelector('main');
+                list.style.width = "92%";
+                list.style.left = "100px";
+            }
+
+            function moveListRight() {
+                let list = document.querySelector('main');
+                list.style.width = "77%";
+                list.style.left = "300px";
+            }
 
             function closeAll() {
                 document.getElementById('todo').style.display = "none";

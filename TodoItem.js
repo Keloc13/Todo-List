@@ -8,20 +8,23 @@ formatTodo.innerHTML = `
         background-color: white;
         padding-top: 20px;
         padding-left: 40px;
+
         background-color: rgba(255,255,255,0.5);
+        position: relative;
+        right: 40px;
     }
 
     h3 {
         position: relative;
         bottom: 30px;
-        left: 40px;
+
         font-weight: normal;
     }
 
     .description {
         position: relative;
         bottom: 70px;
-        left: 40px;
+
     }
 
     .date {
@@ -39,13 +42,15 @@ formatTodo.innerHTML = `
 `
 
 class TodoItem extends HTMLElement {
-    constructor() {
+    constructor(title, description) {
         super();
         this.shadow = this.attachShadow({mode: "open"});
         this.shadow.append(formatTodo.content.cloneNode(true));
 
-        this._title = "";
-        this._description = "";
+        this._title = title;
+        this.shadow.querySelector('h3.title').innerHTML = this._title;
+        this._description = description;
+        this.shadow.querySelector('p.description').innerHTML = this._description;
         this._date = "";
     }
 

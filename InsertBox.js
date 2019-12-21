@@ -75,6 +75,7 @@ class InsertBox extends HTMLElement {
         this.shadow.append(insertBoxHTML.content.cloneNode(true));
         this._isOpen = false;
         this._dataFunc = () => {};
+        this.parentObject = null;
     }
     set isOpen(newOpenVal) {
         this._isOpen = newOpenVal;
@@ -100,7 +101,9 @@ class InsertBox extends HTMLElement {
     storeData() {
         let titleVal = this.shadow.getElementById('title').value;
         let descriptionVal = this.shadow.getElementById('description').value;
-        this._dataFunc(titleVal, descriptionVal);
+        this.shadow.getElementById('description').value = "";
+        this.shadow.getElementById('title').value = "";
+        this._dataFunc(titleVal, descriptionVal,this.parentObject);
     }
 
     connectedCallback(){
